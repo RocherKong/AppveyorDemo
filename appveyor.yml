@@ -1,4 +1,21 @@
 version: 1.0.{build}
+image: Visual Studio 2017
+configuration: Release
+before_build:
+- ps: dotnet restore -v Minimal
 build:
   publish_wap: true
-  verbosity: minimal
+  parallel: true
+  verbosity: normal
+artifacts:
+- path: '*'
+deploy:
+- provider: FTP
+  host: qxw1151980296.my3w.com
+  protocol: ftp
+  username: qxw1151980296
+  password:
+    secure: iarBmpfh9SqJy6uAgtqS6Q==
+  folder: Appveyor
+  active_mode: true
+  beta: false
